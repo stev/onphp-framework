@@ -19,12 +19,14 @@ class MetaDirUtils
 	}
 	
 	public static function mkdir($fullPath, $mode)
-	{	$temp = $mode;
+	{	
+		// TODO: учесть OC, вывод сообщений в консоль через MetaOutput
+		
 		if (!is_dir($fullPath)) {
 			if (!mkdir($fullPath, $mode, true)) {
 //				throw new ErrorException("Не удалось создать директорию: $fullPath\n");
 			} else {
-				echo " создана дириктория: ".$temp." \t{$fullPath}\n";
+				echo " создана дириктория: {$fullPath}\n";
 			}
 		} else {
 			echo "дириктория уже есть: {$fullPath}\n";

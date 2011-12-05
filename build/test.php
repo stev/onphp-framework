@@ -2,7 +2,7 @@
 <?php
 
 
-include 'MetaDirInfo.class.php';
+include 'MetaDir.class.php';
 include 'MetaDirUtils.class.php';
 
 
