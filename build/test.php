@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 
@@ -6,7 +7,7 @@ include 'DirUtils.class.php';
 
 
 $tree
-	= DirInfo::create('poject')->
+	= DirInfo::create('project')->
 		setChild(
 			DirInfo::create('conf'),
 			DirInfo::create('meta'),

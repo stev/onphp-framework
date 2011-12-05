@@ -10,7 +10,7 @@ class DirInfo
 {
 	protected	$name;			// dir name
 	protected	$path = './';	// path to dir
-	protected	$mode;			// 0775
+	protected	$mode = 0755;	
 	
 	protected	$parent;	
 	protected	$childs=array();
@@ -40,7 +40,7 @@ class DirInfo
 	{
 		return $this->name;
 	}
-	
+
 	public function getFullPath()
 	{
 		if ($this->parent instanceof DirInfo) {
@@ -81,7 +81,7 @@ class DirInfo
 
 	
 	/**
-	 * 
+	 * @example 0775
 	 * @param type $mode
 	 * @return DirInfo
 	 * @throws WrongArgumentException 
@@ -95,6 +95,12 @@ class DirInfo
 		
 		return $this;
 	}
+		
+	public function getMode()
+	{
+		return $this->mode;
+	}
+	
 	/**
 	 *
 	 * @param DirInfo $dir
