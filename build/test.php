@@ -2,23 +2,23 @@
 <?php
 
 
-include 'DirInfo.class.php';
-include 'DirUtils.class.php';
+include 'MetaDirInfo.class.php';
+include 'MetaDirUtils.class.php';
 
 
 $tree
-	= DirInfo::create('project')->
+	= MetaDir::create('project')->
 		setChild(
-			DirInfo::create('conf'),
-			DirInfo::create('meta'),
-			DirInfo::create('misc'),
-			DirInfo::create('www'),
-			DirInfo::create('src')->
+			MetaDir::create('conf'),
+			MetaDir::create('meta'),
+			MetaDir::create('misc'),
+			MetaDir::create('www'),
+			MetaDir::create('src')->
 				setChild(
-					DirInfo::create('classes'),
-					DirInfo::create('contollers'),
-					DirInfo::create('templates')
+					MetaDir::create('classes'),
+					MetaDir::create('contollers'),
+					MetaDir::create('templates')
 				)
 		);
 
-DirUtils::mkdirs($tree);
+MetaDirUtils::mkdirs($tree);

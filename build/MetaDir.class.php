@@ -2,11 +2,11 @@
 
 
 /**
- * Description of DirInfo
+ * Description of MetaDir
  *
  * @author stev
  */
-class DirInfo
+class MetaDir
 {
 	protected	$name;			// dir name
 	protected	$path = './';	// path to dir
@@ -25,6 +25,11 @@ class DirInfo
 		$this->name = (string)$name;
 	}
 	
+	/**
+	 *
+	 * @param type $pathToDir
+	 * @return MetaDir 
+	 */
 	public function setPath($pathToDir)
 	{
 		$this->path = $pathToDir;
@@ -43,14 +48,19 @@ class DirInfo
 
 	public function getFullPath()
 	{
-		if ($this->parent instanceof DirInfo) {
+		if ($this->parent instanceof MetaDir) {
 			return $this->parent->getFullPath().$this->name.DIRECTORY_SEPARATOR;
 		}
 		
 		return $this->path.$this->name.DIRECTORY_SEPARATOR;
 	}
 	
-	public function setChild(DirInfo $dir)
+	/**
+	 *
+	 * @param MetaDir $dir
+	 * @return MetaDir 
+	 */
+	public function setChild(MetaDir $dir)
 	{
 		foreach (func_get_args() as $dir) {
 //			Assert::isTrue($dir instanceof DirInfo);
@@ -62,7 +72,7 @@ class DirInfo
 	/**
 	 *
 	 * @param type $name
-	 * @return DirInfo
+	 * @return MetaDir
 	 * @throws WrongArgumentException 
 	 */
 	public function getChild($name)
@@ -83,7 +93,7 @@ class DirInfo
 	/**
 	 * @example 0775
 	 * @param type $mode
-	 * @return DirInfo
+	 * @return MetaDir
 	 * @throws WrongArgumentException 
 	 */
 	public function setChmod($mode)
@@ -103,10 +113,10 @@ class DirInfo
 	
 	/**
 	 *
-	 * @param DirInfo $dir
-	 * @return DirInfo 
+	 * @param MetaDir $dir
+	 * @return MetaDir 
 	 */
-	public function setParent(DirInfo $dir = null)
+	public function setParent(MetaDir $dir = null)
 	{
 		$this->parent = $dir;
 		

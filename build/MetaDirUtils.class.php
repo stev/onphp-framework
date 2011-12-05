@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Description of DirUtils
+ * Description of MetaDirUtils
  *
  * @author stev
  */
-class DirUtils
+class MetaDirUtils
 {
-	public static function mkdirs(DirInfo $dir)
+	public static function mkdirs(MetaDir $dir)
 	{
 		$fullPath = $dir->getFullPath();
 		$mode = $dir->getMode();
