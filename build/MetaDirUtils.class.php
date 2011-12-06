@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Description of MetaDirUtils
  *
@@ -7,30 +9,51 @@
  */
 class MetaDirUtils
 {
-	public static function mkdirs(MetaDir $dir)
+	public static function mkdirs(AbstractMetaFile $metaFile)
 	{
-		$fullPath = $dir->getFullPath();
-		$mode = $dir->getMode();
-		self::mkdir($fullPath, $mode);
-		
-		foreach ($dir->getChilds() as $subDir) {
-			self::mkdirs($subDir);
+		if ($metaFile instanceof MetaSymlink) {
+			self::makeSymlink($metaFile->getFullPath(), $metaFile->getPathTo());
+		}
+		else
+		if ($metaFile instanceof MetaDir) {
+			self::mkdir($metaFile->getFullPath(), $metaFile->getMode());
+
+			foreach ($metaFile->getChilds() as $subDir) {
+				self::mkdirs($subDir);
+			}
 		}
 	}
 	
-	public static function mkdir($fullPath, $mode)
+	public static function mkdir($fullPath, $mode = 0755)
 	{	
 		// TODO: учесть OC, вывод сообщений в консоль через MetaOutput
 		
 		if (!is_dir($fullPath)) {
-			if (!mkdir($fullPath, $mode, true)) {
-//				throw new ErrorException("Не удалось создать директорию: $fullPath\n");
+			if (mkdir($fullPath, $mode, true)) {
+				echo " +  {$fullPath}\n"; //directory is created
 			} else {
-				echo " создана дириктория: {$fullPath}\n";
+//				throw new ErrorException("Не удалось создать директорию: $fullPath\n");
 			}
 		} else {
-			echo "дириктория уже есть: {$fullPath}\n";
+			echo " =  {$fullPath}\n";
 			chmod($fullPath, $mode);
+		}
+	}
+	
+	public static function makeSymlink($fullPath, $pathTo, $mode = 0755)
+	{	
+		// TODO: учесть OC, вывод сообщений в консоль через MetaOutput
+		
+		if (!file_exists($fullPath)) {
+			if (symlink($pathTo, $fullPath)) {
+				// TODO
+//				chmod($fullPath, $mode);
+				echo " +  $fullPath -> $pathTo\n";
+			} else {
+//				throw new ErrorException("Не удалось создать директорию: $fullPath\n");
+			}
+		} else {
+			echo " =  $fullPath -> $pathTo\n";
 		}
 	}
 }

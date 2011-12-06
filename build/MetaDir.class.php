@@ -2,59 +2,25 @@
 
 
 /**
- * Description of MetaDir
+ * @method MetaDir create()
+ * @method MetaDir setPath() setPath(string $pathToDir)
+ * @method MetaDir setPath() setParent(MetaDir $dir = null)
+ * @method MetaDir setMode() setParent($mode)
+ * @method string getPath()
+ * @method string getFullPath()
+ * @method string getMode()
  *
  * @author stev
  */
-class MetaDir
+class MetaDir extends AbstractMetaFile
 {
 	protected	$name;			// dir name
 	protected	$path = './';	// path to dir
 	protected	$mode = 0755;	
+	protected	$type = 0755;	
 	
-	protected	$parent;	
 	protected	$childs=array();
 	 
-	
-	public static function create($name)
-	{
-		return new self($name);
-	}
-	
-	public function __construct($name) {
-		$this->name = (string)$name;
-	}
-	
-	/**
-	 *
-	 * @param type $pathToDir
-	 * @return MetaDir 
-	 */
-	public function setPath($pathToDir)
-	{
-		$this->path = $pathToDir;
-		return $this;
-	}
-	
-	public function getPath()
-	{
-		return $this->path;
-	}
-	
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	public function getFullPath()
-	{
-		if ($this->parent instanceof MetaDir) {
-			return $this->parent->getFullPath().$this->name.DIRECTORY_SEPARATOR;
-		}
-		
-		return $this->path.$this->name.DIRECTORY_SEPARATOR;
-	}
-	
 	/**
 	 *
 	 * @param MetaDir $dir
@@ -88,49 +54,4 @@ class MetaDir
 	{
 		return $this->childs;
 	}
-
-	
-	/**
-	 * @example 0775
-	 * @param type $mode
-	 * @return MetaDir
-	 * @throws WrongArgumentException 
-	 */
-	public function setChmod($mode)
-	{
-		if(!preg_match('~^\d{4}$~', (string)$mode))
-			throw new WrongArgumentException();
-		
-		$this->mode = $mode;
-		
-		return $this;
-	}
-		
-	public function getMode()
-	{
-		return $this->mode;
-	}
-	
-	/**
-	 *
-	 * @param MetaDir $dir
-	 * @return MetaDir 
-	 */
-	public function setParent(MetaDir $dir = null)
-	{
-		$this->parent = $dir;
-		
-		return $this;
-	}
-
-	
-	
-//		/**
-//	 * запросить у файловой системы информацию о диритории
-//	 * @return DirInfo 
-//	 */
-//	public function init()
-//	{
-//		return $this;
-//	}
 }
