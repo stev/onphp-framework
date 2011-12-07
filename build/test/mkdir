@@ -49,7 +49,7 @@ array_shift($args);
 
 foreach($args as $arg) {
 
-	if (preg_match('~^\w+'.COMMANDLINE_DELIMITER.'[\w\d]+$~', $arg)) {
+	if (preg_match('~^\w+'.COMMANDLINE_DELIMITER.'[\w\d\.-_]+$~', $arg)) {
 		
 		list($varName, $value) = split(COMMANDLINE_DELIMITER, $arg);
 
