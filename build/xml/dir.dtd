@@ -1,0 +1,8 @@
+
+<!ELEMENT dir (dir*)>
+<!ATTLIST dir
+	name		CDATA #REQUIRED
+	type		(softLink|hardLink|dir) "dir"
+	path		CDATA #IMPLIED
+	mode		CDATA #IMPLIED
+>

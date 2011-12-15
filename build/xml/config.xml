@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!DOCTYPE dir SYSTEM "dir.dtd">
+
+<dir name="project">
+	<dir name="conf" />
+	<dir name="meta" />
+	<dir name="misc" />
+	<dir name="www" />
+	<dir name="src">
+		<dir name="classes" />
+		<dir name="contollers" />
+		<dir name="templates" />
+	</dir>
+</dir>
