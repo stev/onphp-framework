@@ -1,0 +1,58 @@
+<?php
+/***************************************************************************
+ *   Copyright (C) by Stepanov Evgeny                                      *
+ *   from.stev@gmail.com                                                   *
+ ***************************************************************************
+ * $Id: tableAndActions.tpl.html 1546 2011-03-16 18:19:10Z stev $ */
+
+/*
+ * должны прийти:
+ * - $_objects	(массив объектов)
+ * - $_filter	(фильтр)
+ * - $_name		(название таблицы)
+ * - $_actions	(действия)
+ */
+
+?>
+	<table id="table_<?=$_objectName?>" cellpadding="4" class="plain">
+		<tr>
+<?
+foreach ($_fields as $key => $type) { ?>
+			<td class="headGray">
+				<b><?=_($key)?></b>
+			</td>
+<?}
+
+if (count($_actions)) { ?>
+			<td class="headGray" colspan="<?=count($_actions) ?>">
+				<b><?=_('действие')?></b>
+			</td>
+<?}?>
+
+
+		</tr>
+<?
+$i = 1;
+foreach ($_objects as $key => $object) { ?>
+		<tr id="tr_<?=$object->getId()?>" <?= $i%2 ? ' style="background-color: #eee"': null ?>>
+<?
+	foreach ($_fields as $fieldName => $type) { ?>
+			<td class="span">
+				<?	$method = 'get'.ucfirst($fieldName); ?>
+				<?=	method_exists($object, $method)
+					? GuiUtils::ObjectToString($object->{$method}())
+					: '&nbsp;';
+				?>
+			</td>
+<?	}
+
+	foreach ($_actions as $actionName => $url) { ?>
+			<td class="span">
+				<a href="<?=$url->set('id', $object->getId()) ?>"><?=_($actionName)?></a>
+			</td>
+<?	}?>
+		</tr><?
+	$i++;
+}
+?>
+	</table>

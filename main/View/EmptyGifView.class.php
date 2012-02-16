@@ -25,7 +25,7 @@
 		/**
 		 * @return EmptyGifView
 		**/
-		public function render(/* Model */ $model = null)
+		public function render(Model $model = null)
 		{
 			header('Content-Type: image/gif');
 			header('Content-Length: 43');

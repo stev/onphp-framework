@@ -151,7 +151,7 @@
 		/**
 		 * @return JsonView
 		**/
-		public function render(/* Model */ $model = null)
+		public function render(Model $model = null)
 		{
 			echo $this->toString($model);
 

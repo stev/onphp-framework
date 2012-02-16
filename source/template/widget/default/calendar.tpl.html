@@ -1,0 +1,7 @@
+<? /* @var $_value Date */
+if($_value) {
+	$value = date($_format, $_value->toStamp());
+} else {
+	$value = $_value;
+}
+?><input type="text" name="<?= $_widgetName ?>" value="<?= $value ?>" class="calendar" />

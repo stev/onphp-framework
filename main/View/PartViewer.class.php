@@ -12,7 +12,7 @@
 	/**
 	 * @ingroup Flow
 	**/
-	class PartViewer
+	class PartViewer implements InterfacePartViewer
 	{
 		protected $viewResolver 	= null;
 		protected $model			= null;

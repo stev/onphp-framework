@@ -19,6 +19,6 @@
 		/**
 		 * @param $model null or Model
 		**/
-		public function render($model = null);
+		public function render(Model $model = null);
 	}
 ?>

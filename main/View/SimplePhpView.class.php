@@ -15,6 +15,9 @@
 	class SimplePhpView extends EmptyView
 	{
 		protected $templatePath		= null;
+		/**
+		 * @var MultiPrefixPhpViewResolver
+		 */
 		protected $partViewResolver	= null;
 		
 		public function __construct($templatePath, ViewResolver $partViewResolver)
@@ -26,24 +29,44 @@
 		/**
 		 * @return SimplePhpView
 		**/
-		public function render(/* Model */ $model = null)
+		public function render(Model $model = null)
 		{
-			Assert::isTrue($model === null || $model instanceof Model);
-			
 			if ($model)
 				extract($model->getList());
 			
 			$partViewer = new PartViewer($this->partViewResolver, $model);
-			
+			try {
 			$this->preRender();
 			
 			include $this->templatePath;
 			
 			$this->postRender();
-			
+			}
+			catch (Exception $e) {
+				echo $e;
+				exit();
+			}
 			return $this;
 		}
 		
+		/**
+		 * @return ViewResolver
+		**/
+		public function getResolver()
+		{
+			return $this->partViewResolver;
+		}
+
+		/**
+		 * @return SimplePhpView
+		**/
+		public function setResolver(ViewResolver $resolver)
+		{
+			$this->partViewResolver = $resolver;
+
+			return $this;
+		}
+
 		public function toString($model = null)
 		{
 			try {

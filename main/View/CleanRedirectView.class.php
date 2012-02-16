@@ -29,7 +29,7 @@
 			return new self($url);
 		}
 		
-		public function render($model = null)
+		public function render(Model $model = null)
 		{
 			HeaderUtils::redirectRaw($this->getLocationUrl($model));
 		}

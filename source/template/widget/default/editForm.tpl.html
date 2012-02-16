@@ -1,0 +1,133 @@
+<?
+//	"0" :  "_name"
+//	"1" :  "_url"
+//	"2" :  "_mapper"
+//	"3" :  "_fieldMap"
+//	"4" :  "_filter"
+//	"5" :  "_form"
+//	"6" :  "parentModel"
+//	"7" :  "rootModel"
+
+/* @var $_form Form */
+
+$errorLables = array(
+	1 => 'не верное.',
+	2 => 'не указанно.'
+);
+
+?>
+
+<div class="edit_form myform">
+	<form action="<?=$_url?>" method="POST">
+		<table class="form">
+<?
+$src = null;
+$i = 1;
+foreach ($_form->getPrimitiveList() as $key => $prm) {
+
+	try {
+		if (isset($_map[$key])) {			// name:widget
+			$src = $_map[$key]->
+				setName($key)->
+				setValue($prm)->
+				render();
+		} else {							// primitive:widget
+
+			if ($prm instanceof PrimitiveIdentifier) {
+				$src = $prm->getValue()
+					?$prm->getValue()->getId()
+					:NULL;
+			}
+			elseif ($prm instanceof PrimitiveDate) {
+				$src = WCalendar::create($prm->getName())->
+					setValue($prm->getValue());
+			}
+			elseif ($prm instanceof PrimitiveString) {
+				if($prm->getMax() > 128) {
+					$src = WTextBox::create($prm->getName())->
+						setParams(array('size'=>$prm->getMax()))->
+						setValue($prm->getValue());
+				} else {
+					$src = WTextField::create($prm->getName())->
+						setParams(array('size'=>$prm->getMax()))->
+						setValue($prm->getValue());
+				}
+			}
+			else if ($prm instanceof PrimitiveInteger) {
+				$src = WTextField::create($prm->getName())->
+					setValue($prm->getValue());
+			}
+			else if ($prm instanceof PrimitiveBoolean) {
+				$src = WBoolean::create($prm->getName())->
+					setValue($prm->getValue());
+			}
+			else if ($prm instanceof PrimitiveTernary) {
+//				dump::vars($prm);
+				$src = WTernary::create($prm->getName())->
+					setTrueValue($prm->getTrueValue())->
+					setFalseValue($prm->getFalseValue())->
+					setValue($prm->getValue());
+			}
+			else if ($prm instanceof PrimitiveEnumeration) {
+
+				$class = $prm->getClassName();
+				$class = new TestStatus(TestStatus::getAnyId());
+
+				$src = WSelect::create($prm->getName())->
+					setArray($class->getObjectList())->
+					setValue($prm->getValue());
+			}
+			else if ($prm instanceof PrimitiveList) {
+				$src = WMultiSelect::create($prm)->
+					setValue($prm->getValue());
+			}
+			else {
+				throw new WrongArgumentException();
+			}
+		}
+
+		$error = null;
+
+//		if($prm->getError()) {
+//			if($prm->getError() == 1) {
+//				$error = $errorLables[1];
+//			} else {
+//				$error = $errorLables[2];
+//			}
+//
+//			$error = '<span class="reguired">'.$error.'</span>';
+//		}
+		?>
+			<tr<?= $i%2 ? ' style="background-color: #eee"': null ?>>
+				<td>
+<!--			<label style="display: list-item">-->
+					<?= $key?>
+					<?= $prm->isRequired() ? '<span class="small red"> * </span>' : null ?>
+<!--			</label> -->
+				</td>
+			<td>
+				<?= $src?><?= $error ?>
+			</td>
+		</tr>
+		<?
+	} catch (WrongArgumentException $e) {
+		?><div class="error">todo: no mapped primitive: <?=get_class($prm)?></div><?
+	}
+	$i++;
+}
+?>
+		<div class="spacer"></div>
+			<tr>
+				<td>
+				<?
+					if ($_form->primitiveExists('id')) {
+						$className = $_form->get('id')->getClassName();
+				?>
+					<a href="<?= Href::create('autoListEditor')->set('object', $className)?>" >отмена</a>
+				<?	}	?>
+				</td>
+				<td><input type="submit" name="save" value="сохранить" /></td>
+			</tr>
+		</table>
+	</form>
+</div>

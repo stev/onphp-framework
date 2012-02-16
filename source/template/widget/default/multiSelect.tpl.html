@@ -1,0 +1,52 @@
+<?
+/**
+ * $form
+ * $objects
+ * $objectName
+ */
+
+
+/** WTF?
+ * 	"0" :  "action"
+	"1" :  "form"
+	"2" :  "subject"
+	"3" :  "title"
+	"4" :  "metaKeyword"
+	"5" :  "area"
+	"6" :  "loginUser"
+	"7" :  "selfUrl"
+	"8" :  "baseUrl"
+	"9" :  "controllerName"
+	"10" :  "parentModel"
+	"11" :  "rootModel"
+	"12" :  "_name"
+	"13" :  "_value"
+	"14" :  "_url"
+	"15" :  "_fieldMap"
+	"16" :  "_filter"
+	"17" :  "_form"
+ */
+dump::vars(array_keys($model->getList()));
+ /**
+  * TODO: check interface! $value->getName()
+  */
+?>
+<select name="<?=$objectName;?>" multiple>
+<?php
+	foreach ($objects as $object) {
+		$selected = null;
+
+		if (
+			$form->getValue($objectName)
+			&&
+				$form->getValue($objectName)->getId() == $object->getId()
+		)
+			$selected =' selected ';
+?>
+		<option value="<?=$object->getId()?>" <?=$selected?>>
+			<?=$object->getName()?>
+		</option>
+<?php
+	}
+?>
+</select>

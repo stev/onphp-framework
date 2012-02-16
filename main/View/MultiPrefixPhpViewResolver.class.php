@@ -76,6 +76,7 @@
 		public function dropPrefixes()
 		{
 			$this->prefixes = array();
+
 			return $this;
 		}
 		
