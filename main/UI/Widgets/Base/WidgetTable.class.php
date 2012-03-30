@@ -69,7 +69,7 @@ abstract class WidgetTable extends BaseWidget
 	 * @param IFieldsFilter $filter
 	 * @return WidgetTable
 	 */
-	public function setFieldsFilter(IFieldsFilter $filter)
+	public function setFieldsFilter(InterfaceFieldsFilter $filter)
 	{
 		$this->filter = $filter;
 		return $this;
