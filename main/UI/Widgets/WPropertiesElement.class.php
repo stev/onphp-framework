@@ -29,7 +29,7 @@ class WPropertiesElement extends BaseWidget
 		if ($params)
 			$widget->setParams($params);
 
-		return $widget->setParams($params);
+		return $widget;
 	}
 	
 	public function __construct($name = null)
