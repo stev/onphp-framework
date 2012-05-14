@@ -11,6 +11,11 @@
 
 	/**
 	 * @ingroup OSQL
+	 *
+	 * @method SelectQuery where()
+	 * @method SelectQuery andWhere()
+	 * @method SelectQuery orWhere()
+	 * @method SelectQuery dropReturning()
 	**/
 	final class SelectQuery
 		extends QuerySkeleton
