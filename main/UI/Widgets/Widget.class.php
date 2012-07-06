@@ -16,6 +16,15 @@
 		{
 			return WNavBar::create($name);
 		}
+		/**
+		 *
+		 * @param type $name
+		 * @return WidgetSubNav
+		 */
+		static public function subNav($name=null)
+		{
+			return WidgetSubNav::create($name);
+		}
 
 		/**
 		 *
