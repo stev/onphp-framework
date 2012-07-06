@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 /**
- * @method WLink create()
+ * @method WLink create($name)
  * @method WLink setTplName()
  * @method WLink setViewer()
  * @method WLink setModel()

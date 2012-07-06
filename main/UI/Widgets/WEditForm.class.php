@@ -10,7 +10,7 @@
 
 /**
  * @package UI\Widget
- * @method WEditForm create()
+ * @method WEditForm create($name)
  * @method WEditForm setSubmitUrl()
  * @method WEditForm setTplName()
  * @method WEditForm setViewer()

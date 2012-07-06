@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 /**
- * @method WBoolean create()
+ * @method WBoolean create($name)
  * @method WBoolean setTplName()
  * @method WBoolean setViewer()
  * @method WBoolean setModel()

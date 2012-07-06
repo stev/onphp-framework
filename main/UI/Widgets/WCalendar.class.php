@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 /**
- * @method WCalendar create()
+ * @method WCalendar create($name)
  * @method WCalendar setTplName()
  * @method WCalendar setViewer()
  * @method WCalendar setModel()

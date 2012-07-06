@@ -10,7 +10,7 @@
 
 /**
  * @package UI\Widget
- * @method WTextField create()
+ * @method WTextField create($name)
  * @method WTextField setTplName()
  * @method WTextField setViewer()
  * @method WTextField setModel()

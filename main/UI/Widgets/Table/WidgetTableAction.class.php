@@ -9,22 +9,32 @@
  ***************************************************************************/
 
 
-/**
- * @method HtmlTableAndActions setObjects()
- * @method HtmlTableAndActions setFieldsFilter()
- * @method HtmlTableAndActions setTplName()
- * @method HtmlTableAndActions setViewer()
- * @method HtmlTableAndActions setModel()
- */
-class HtmlTableAndActions extends WidgetTableAction
+class WidgetTableAction extends WidgetTable
 {
+	protected $tplName = 'tableAndActions';
+	protected $actions = array();
+
 	/**
-	 * @param type $name
-	 * @return HtmlTableAndActions
+	 * array(
+	 *	edit => Href::create();
+	 *	save => Href::create();
+	 * )
+	 * @param array $array
 	 */
-	public static function create($name = null)
+	public function setActions(array $array)
 	{
-		return new self($name);
+		$this->actions = $array;
+
+		return $this;
+	}
+
+	/**
+	 * @return Model
+	 */
+	protected function makeModel()
+	{
+		return parent::makeModel()->
+			set('_actions', $this->actions);
 	}
 }
 

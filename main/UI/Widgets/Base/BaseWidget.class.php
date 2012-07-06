@@ -103,9 +103,9 @@ abstract class BaseWidget implements IfaceWidget
 		$source = null;
 		ob_start();
 
-		$this->prepareModel();
-
 		try {
+			$this->prepareModel();
+
 			if ($model && $merge) {
 				$this->model->merge($model);
 			}
@@ -116,13 +116,11 @@ abstract class BaseWidget implements IfaceWidget
 			);
 
 			$source = ob_get_contents();
-		} catch (WrongArgumentException $e) {
-			return $e->__toString();
 		} catch (Exception $e) {
 			// TODO : прописать системный сервис информирования об ошибках
 			// использую разные стратегии информирования или цепочки, лог, почта, раббит..
 			// а так же поведение, редирект на продакшине например
-			return($e->__toString());
+			return "<pre>". $e->__toString() . "</pre>";
 		}
 
 		ob_end_clean();

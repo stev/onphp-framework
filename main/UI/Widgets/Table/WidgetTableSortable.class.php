@@ -7,19 +7,36 @@
  *   published by the Free Software Foundation; either version 3 of the    *
  *   License, or (at your option) any later version.                       *
  ***************************************************************************/
-/* $Id$ */
 
 
-
-class HtmlImg
+/**
+ * Description of tableSortable
+ */
+class WidgetTableSortable extends WidgetTableAction
 {
+	protected $tplName = 'tableSortable';
+	protected $sortField;
+	protected $sortMode;
+
 	/**
-	 * @return HtmlImg
+	 *
+	 * @param type $field
+	 * @param type $mode
+	 * @return WidgetTableSortable 
 	 */
-	public static function create()
+	public function setSortedFieldName($field, $mode)
 	{
-		return new self;
+		$this->sortField = $field;
+		$this->sortMode = $mode;
+
+		return $this;
+	}
+
+	protected function makeModel()
+	{
+		return parent::makeModel()->
+			set('_sortField', $this->sortField)->
+			set('_sortMode', $this->sortMode);
 	}
 }
 
-?>

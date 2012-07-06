@@ -10,7 +10,7 @@
 
 
 
-abstract class WidgetTable extends BaseWidget
+class WidgetTable extends BaseWidget
 {
 	protected $headerFields = array();
 	protected $objects = array();
@@ -18,6 +18,14 @@ abstract class WidgetTable extends BaseWidget
 	protected $tplName = 'table';
 	protected $tplPrefix = 'table';
 
+	/**
+	 * @return HtmlTable
+	 */
+	public static function create($name=null)
+	{
+		return new static($name);
+	}
+	
 	/**
 	 * @return WidgetTable
 	 */

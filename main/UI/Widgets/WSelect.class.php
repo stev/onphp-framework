@@ -10,7 +10,7 @@
 
 /**
  * @package UI\Widget
- * @method WMultiSelect create()
+ * @method WMultiSelect create($name)
  * @method WMultiSelect setTplName()
  * @method WMultiSelect setViewer()
  * @method WMultiSelect setModel()

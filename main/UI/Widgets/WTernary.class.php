@@ -10,7 +10,7 @@
 
 /**
  * @package UI\Widget
- * @method WTernary create()
+ * @method WTernary create($name)
  * @method WTernary setTplName()
  * @method WTernary setViewer()
  * @method WTernary setModel()

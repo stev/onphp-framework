@@ -138,7 +138,7 @@
 				($this->prefixes === array()),
 				'specify at least one prefix'
 			);
-			
+
 			if ($prefix = $this->findPrefix($viewName))
 				return $this->makeView($prefix, $viewName);
 			

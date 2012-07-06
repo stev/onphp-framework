@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><?= $title ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="<?=$skinName ?>/ico/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?=$skinName ?>/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?=$skinName ?>/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="<?=$skinName ?>/ico/apple-touch-icon-57-precomposed.png">
+
+		<!-- styles -->
+		<?= $css ?>
+	</head>
+	<body>
+
+		<?= $navBar	?>
+
+		<div class="container-fluid">
+			<div class="row">
+
+				<?= $wForm ?>
+			</div>
+
+			<div class="row box">
+				<h1>Заголовок: название</h1>
+
+				<?=	$wTable ?>
+			</div>
+		</div>
+
+		<!-- javascript -->
+		<?= $js ?>
+	</body>
+</html>

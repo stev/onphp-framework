@@ -34,7 +34,7 @@ class PhpView extends SimplePhpView
 			ob_end_clean();
 			echo $e;
 			exit();
-			// DebugUtils::ExcOutOrSendMail($e);
+//			 DebugUtils::ExcOutOrSendMail($e);
 		}
 
 		echo ob_get_clean();

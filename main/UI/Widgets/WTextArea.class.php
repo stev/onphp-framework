@@ -10,7 +10,7 @@
 
 /**
  * @package UI\Widget
- * @method WTextArea create()
+ * @method WTextArea create($name)
  * @method WTextArea setTplName()
  * @method WTextArea setViewer()
  * @method WTextArea setModel()
