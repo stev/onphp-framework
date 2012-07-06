@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<? Viewer::load('header/main') ?>
+	</head>
+	<body>
+		<?= $wNavBar ?>
+		<div class="container-fluid">
+			<?= $wSubNav ?>
+			<div class="row-fluid">
+				<div class="span3">
+
+					<?= $wSidebar ?>
+				</div>
+				<div class="span9">
+					<div class="row-fluid">
+						<div class="wrapper">
+							<h1>Заголовок: название</h1>
+
+							<?= $wTable ?>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- javascript -->
+		<script src="<?=$skinName ?>/js/jquery.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-transition.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-alert.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-modal.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-dropdown.js"></script>
+
+		<script src="<?=$skinName ?>/js/bootstrap-scrollspy.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-tab.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-tooltip.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-popover.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-button.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-collapse.js"></script>
+
+		<script src="<?=$skinName ?>/js/bootstrap-carousel.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-typeahead.js"></script>
+		<?= $model->has('js') ? $model->get('js') : null ?>
+	</body>
+</html>

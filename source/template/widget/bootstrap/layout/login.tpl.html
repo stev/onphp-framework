@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<? Viewer::load('header/main') ?>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="well" style="width:40%;margin:auto auto;">
+					
+					<form action="dark/index.html" method="get">
+						<fieldset>
+							<div class="control-group">
+								<label class="control-label" for="prependedInput">Username:</label>
+								<div class="controls">
+									<div class="input-prepend">
+										<input id="username" size="16" type="text" value="admin">
+									</div>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="prependedInput">Password:</label>
+								<div class="controls">
+									<div class="input-prepend">
+										<input class="input-xlarge-fluid" id="password" size="16" type="password" value="mypassword">
+									</div>
+								</div>
+							</div>
+
+							<div>
+								<button type="submit" class="btn btn-large btn-primary">Login</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- javascript -->
+		<script src="<?=$skinName ?>/js/jquery.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-transition.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-alert.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-modal.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-dropdown.js"></script>
+
+		<script src="<?=$skinName ?>/js/bootstrap-scrollspy.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-tab.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-tooltip.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-popover.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-button.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-collapse.js"></script>
+
+		<script src="<?=$skinName ?>/js/bootstrap-carousel.js"></script>
+		<script src="<?=$skinName ?>/js/bootstrap-typeahead.js"></script>
+		<?= $model->has('js') ? $model->get('js') : null ?>
+	</body>
+</html>

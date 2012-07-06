@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
 		<title><?= $title ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="shortcut icon" href="<?=$skinName ?>/ico/favicon.ico">
@@ -9,26 +6,6 @@
 		<link rel="apple-touch-icon-precomposed" href="<?=$skinName ?>/ico/apple-touch-icon-57-precomposed.png">
 
 		<!-- styles -->
-		<?= $css ?>
-	</head>
-	<body>
-
-		<?= $navBar	?>
-
-		<div class="container-fluid">
-			<div class="row">
-
-				<?= $wForm ?>
-			</div>
-
-			<div class="row box">
-				<h1>Заголовок: название</h1>
-
-				<?=	$wTable ?>
-			</div>
-		</div>
-
-		<!-- javascript -->
-		<?= $js ?>
-	</body>
-</html>
+		<link href="<?=$skinName ?>/css/bootstrap.css" rel="stylesheet">
+		<link href="<?=$skinName ?>/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="<?= Href::create('css', 'override.css') ?>" rel="stylesheet">
