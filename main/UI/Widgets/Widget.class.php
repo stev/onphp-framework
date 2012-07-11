@@ -66,6 +66,15 @@
 		{
 			return WidgetTable::create($name);
 		}
+		/**
+		 *
+		 * @param type $name
+		 * @return WidgetTableAction
+		 */
+		static public function tableAction($name=null)
+		{
+			return WidgetTableAction::create($name);
+		}
 
 		//~~~~~~~~ form widgets ~~~~~~~~~~
 		/**
