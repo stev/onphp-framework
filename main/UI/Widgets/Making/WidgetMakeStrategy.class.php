@@ -67,12 +67,21 @@ class WidgetMakeStrategy implements IfaceWidgetMakeStrategy
 	{
 		$src = null;
 
-		if ($prm instanceof PrimitiveIdentifier) {
+		if ($prm instanceof PrimitiveIdentifierList) {
 			$src = WTextField::create($prm->getName())->
 				setRequired($prm->isRequired())->
 				setLabel($prm->getName())->
 				setValue(
 					$prm->getValue()
+					? get_class($prm) // $prm->getValue()->getId()
+					: NULL
+				);
+		} elseif ($prm instanceof PrimitiveIdentifier) {
+			$src = WTextField::create($prm->getName())->
+				setRequired($prm->isRequired())->
+				setLabel($prm->getName())->
+				setValue(
+					$prm->getValue() instanceof Identifiable
 					? $prm->getValue()->getId()
 					: NULL
 				);
