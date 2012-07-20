@@ -43,7 +43,7 @@ class PhpView extends SimplePhpView
 
 		return $this;
 	}
-
+	
 //	protected function preRender()
 //	{
 //		if (defined('PRINT_VIEW_PATH')) {

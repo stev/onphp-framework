@@ -6,53 +6,52 @@
  
 
 /*
- * Ð´Ð¾Ð»Ð¶Ð½Ñ Ð¿ÑÐ¸Ð¹ÑÐ¸:
- * - $_objects	(Ð¼Ð°ÑÑÐ¸Ð² Ð¾Ð±ÑÐµÐºÑÐ¾Ð²)
- * - $_filter	(ÑÐ¸Ð»ÑÑÑ)
- * - $_name		(Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÑÐ°Ð±Ð»Ð¸ÑÑ)
- * - $_actions	(Ð´ÐµÐ¹ÑÑÐ²Ð¸Ñ)
+ * - $_objects	
+ * - $_filter	
+ * - $_name		
+ * - $_actions	
  */
 
 ?>
-	<table id="table_<?=$_objectName?>" cellpadding="4" class="plain">
+	<table class="table">
+		<thead class="fixed">
+			<tr class="breadcrumb">
+				<? foreach ($_fields as $key => $type) { ?>
+				<th class="breadcrumb">
+					<b><?=_($key)?></b>
+				</th>
+				<? } ?>
+
+				<? if (count($_actions)) { ?>
+				<th class="breadcrumb" colspan="<?=count($_actions) ?>">
+					<b><?=_('actions')?></b>
+				</th>
+				<? } ?>
+			</tr>
+		</thead>
+		<tbody>
+
+		<?	$i = 1; ?>
+		<?	foreach ($_objects as $key => $object) { ?>
 		<tr>
-<?
-foreach ($_fields as $key => $type) { ?>
-			<td class="headGray">
-				<b><?=_($key)?></b>
-			</td>
-<?}
-
-if (count($_actions)) { ?>
-			<td class="headGray" colspan="<?=count($_actions) ?>">
-				<b><?=_('Ð´ÐµÐ¹ÑÑÐ²Ð¸Ðµ')?></b>
-			</td>
-<?}?>
-
-
-		</tr>
-<?
-$i = 1;
-foreach ($_objects as $key => $object) { ?>
-		<tr id="tr_<?=$object->getId()?>" <?= $i%2 ? ' style="background-color: #eee"': null ?>>
-<?
-	foreach ($_fields as $fieldName => $type) { ?>
-			<td class="span">
+			<?	foreach ($_fields as $fieldName => $type) { ?>
+			<td>
 				<?	$method = 'get'.ucfirst($fieldName); ?>
 				<?=	method_exists($object, $method)
 					? GuiUtils::ObjectToString($object->{$method}())
 					: '&nbsp;';
 				?>
 			</td>
-<?	}
+			<? } ?>
 
-	foreach ($_actions as $actionName => $url) { ?>
-			<td class="span">
+			<? foreach ($_actions as $actionName => $url) { ?>
+			<td>
 				<a href="<?=$url->set('id', $object->getId()) ?>"><?=_($actionName)?></a>
 			</td>
-<?	}?>
-		</tr><?
-	$i++;
-}
-?>
+			<? }?>
+		</tr>
+		<?	$i++;
+			}
+		?>
+		</tbody>
 	</table>

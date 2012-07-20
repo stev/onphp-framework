@@ -11,22 +11,22 @@
 
 	/**
 	 * View resolver for php templates with multiple prefix support
-	 * 
+	 *
 	 * Will resolve view to first readable template from
 	 * supplied prefixes list
-	 * 
+	 *
 	 * @ingroup Flow
 	**/
 	class MultiPrefixPhpViewResolver implements ViewResolver
 	{
 		private $prefixes	= array();
 		private $lastAlias	= null;
-		
+
 		private $disabled	= array();
-		
+
 		private $postfix	= EXT_TPL;
 		private $viewClassName	= 'SimplePhpView';
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
@@ -34,17 +34,17 @@
 		{
 			return new self;
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
 		public function addFirstPrefix($prefix)
 		{
 			array_unshift($this->prefixes, $prefix);
-			
+
 			return $this;
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
@@ -52,24 +52,66 @@
 		{
 			if (!$alias)
 				$alias = $this->getAutoAlias($prefix);
-			
+
 			Assert::isFalse(
 				isset($this->prefixes[$alias]),
 				'alias already exists'
 			);
-				
+
 			$this->prefixes[$alias] = $prefix;
-			
+
 			$this->lastAlias = $alias;
-			
+
 			return $this;
 		}
-		
+
+		/**
+		 * example
+		 * <pre>
+		 * <code>
+		 * //.. 1
+		 * $resolver->addPrefixes(
+		 *		array(
+		 *			'hash1' => '/path/one',
+		 *			'hash2' => '/path/other',
+		 *			// or
+		 *			'/path/other2'
+		 *		)
+		 * );
+		 * //.. 2
+		 * $resolver->addPrefixes(
+		 *		'/path/one',
+		 *		'/path/other'
+		 *		// ...
+		 * );
+		 * </code>
+		 * </pre>
+		 *
+		 * @param array | string $prefixes
+		 * @return \MultiPrefixPhpViewResolver
+		 */
+		public function addPrefixes($prefixes /* , ... */)
+		{
+			if (func_num_args() == 1) {
+				if (is_array($prefixes)) {
+					array_merge($this->prefixes, $prefixes);
+
+					return $this;
+				}
+			}
+
+			foreach (func_get_args() as $prefix) {
+				$this->addPrefix($prefix);
+			}
+
+			return $this;
+		}
+
 		public function getPrefixes()
 		{
 			return $this->prefixes;
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
@@ -78,7 +120,7 @@
 			$this->prefixes = array();
 			return $this;
 		}
-		
+
 		public function isPrefixDisabled($alias)
 		{
 			Assert::isIndexExists(
@@ -86,10 +128,10 @@
 				$alias,
 				'no such alias: '.$alias
 			);
-			
+
 			return !empty($this->disabled[$alias]);
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
@@ -97,29 +139,29 @@
 		{
 			if (!$alias)
 				$alias = $this->lastAlias;
-			
+
 			Assert::isNotNull($alias, 'nothing to disable');
 			Assert::isIndexExists(
 				$this->prefixes,
 				$alias,
 				'no such alias: '.$alias
 			);
-			
+
 			$this->disabled[$alias] = $disabled;
-			
+
 			return $this;
 		}
-		
+
 		public function enablePrefix($alias)
 		{
 			return $this->disablePrefix($alias, false);
 		}
-		
+
 		public function getPostfix()
 		{
 			return $this->postfix;
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
@@ -128,7 +170,7 @@
 			$this->postfix = $postfix;
 			return $this;
 		}
-		
+
 		/**
 		 * @return SimplePhpView
 		**/
@@ -141,7 +183,7 @@
 
 			if ($prefix = $this->findPrefix($viewName))
 				return $this->makeView($prefix, $viewName);
-			
+
 			if (!$this->findPrefix($viewName, false)) {
 				throw new WrongArgumentException(
 					'can not resolve view: '.$viewName. PHP_EOL
@@ -151,27 +193,27 @@
 
 			return EmptyView::create();
 		}
-		
+
 		public function viewExists($viewName)
 		{
 			return ($this->findPrefix($viewName) !== null);
 		}
-		
+
 		/**
 		 * @return MultiPrefixPhpViewResolver
 		**/
 		public function setViewClassName($viewClassName)
 		{
 			$this->viewClassName = $viewClassName;
-			
+
 			return $this;
 		}
-		
+
 		public function getViewClassName()
 		{
 			return $this->viewClassName;
 		}
-		
+
 		protected function findPrefix($viewName, $checkDisabled = true)
 		{
 			foreach ($this->prefixes as $alias => $prefix) {
@@ -181,14 +223,14 @@
 					&& $this->disabled[$alias]
 				)
 					continue;
-				
+
 				if (file_exists($prefix.$viewName.$this->postfix))
 					return $prefix;
 			}
-			
+
 			return null;
 		}
-		
+
 		/**
 		 * @return View
 		**/
@@ -199,7 +241,7 @@
 				$this
 			);
 		}
-		
+
 		private function getAutoAlias($prefix)
 		{
 			return md5($prefix);

@@ -229,5 +229,10 @@
 				}
 			}
 		}
+
+		public static function IsAccessibility($class, $paths = array())
+		{
+
+		}
 	}
 ?>
